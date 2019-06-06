@@ -1,0 +1,19 @@
+{
+  "name": "jeminolis181journal",
+  "version": "1.0.0",
+  "description": "LIS181Journal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyljmn/JeminoLIS181Journal.git"
+  },
+  "author": "Kyle Henry C. Jemino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyljmn/JeminoLIS181Journal/issues"
+  },
+  "homepage": "https://github.com/kyljmn/JeminoLIS181Journal#readme"
+}
