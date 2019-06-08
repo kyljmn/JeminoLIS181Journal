@@ -1,0 +1,11 @@
+body {
+  background-color: #78281F;
+}
+#PostBtn {
+  position: relative;
+  margin: 1% 25%;
+  width: 50%;
+}
+#formDel {
+  display: inline;
+}
