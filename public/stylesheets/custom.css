@@ -9,3 +9,11 @@ body {
 #formDel {
   display: inline;
 }
+
+div.main {
+  margin-top: 10vh;
+}
+
+#homeBtn {
+  text-decoration: none;
+}

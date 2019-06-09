@@ -2,7 +2,7 @@
 <div class="ui main text container">
   <div class="ui raised segment">
     <div class="ui divided items">
-      <% blogs.forEach(function(blog){ %>
+      <% blogs.reverse().forEach(function(blog){ %>
         <div class="item">
           <div class="image">
             <img src="<%= blog.image %>">
