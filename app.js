@@ -12,6 +12,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
+var userSchema = new mongoose.Schema({
+  username: String,
+  password: String
+}); 
+
 var   blogSchema =  new mongoose.Schema({
   title: String,
   image: String,
@@ -87,7 +92,11 @@ app.delete("/blogs/:id", function(req, res){
       res.redirect("/blogs");
     }
   })
-})
+});
+
+app.get("/login", function(req,res){
+  res.render("login");
+});
 
 
 app.listen(8080, function(){
