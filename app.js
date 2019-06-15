@@ -2,7 +2,11 @@ var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     methodOverride = require("method-override"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
+    passport = require("passport"),
+    localStrategy = require("passport-local"),
+    Blog = require("./models/blog"),
+    User = require("./models/user");
 
 mongoose.set('useNewUrlParser', true);
 mongoose.connect("mongodb+srv://kyljmn:123@kyljmn-mvoiy.mongodb.net/test?retryWrites=true&w=majority");
@@ -11,20 +15,21 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(require("express-session")({
+  secret: "LONGASSMOTHERFUCKINGSTRING",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-var userSchema = new mongoose.Schema({
-  username: String,
-  password: String
-}); 
-
-var   blogSchema =  new mongoose.Schema({
-  title: String,
-  image: String,
-  body: String,
-  created: {type: Date, default: Date.now}
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next()
 });
-
-var Blog = mongoose.model("Blog", blogSchema);
 
 app.get("/", function(req, res){
   res.redirect("/blogs");
@@ -94,8 +99,35 @@ app.delete("/blogs/:id", function(req, res){
   })
 });
 
+app.get("/register", function(req,res){
+  res.render("register");
+});
+
+app.post("/register", function(req,res){
+  var newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, function(err, user){
+    if(err){
+      console.log(err);
+      res.redirect("/register");
+    }
+    passport.authenticate("local")(req, res, function(){
+      res.redirect("/blogs");
+    });
+  });
+});
+
 app.get("/login", function(req,res){
   res.render("login");
+})
+
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "/blogs",
+  failureRedirect: "/login"
+  }), function(req,res){
+});
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/blogs");
 });
 
 

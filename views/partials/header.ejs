@@ -10,6 +10,12 @@
     <div class="ui top fixed menu">
         <a class="item" href="/blogs">JEMINO LIS 181 Journal</a>
       <div class="right menu">
-        <a class="item" href="/login"><i class="sign in alternate icon"></i></a>
+            <% if(!currentUser){ %>
+                <a class="item" href="/login"><i class="sign in alternate icon"></i></a>
+                <a href="/register" class="item">Sign Up</a>
+            <% } else { %>
+                <a href="#" class="item">Signed In As <%= currentUser.username %></a>
+                <a href="/logout" class="item">Logout</a>
+            <% } %>
       </div>
     </div>
