@@ -60,7 +60,7 @@ app.post("/blogs", middleware.isItKyle, function(req,res){
   });
 });
 
-app.get("/blogs/:id", middleware.isItKyle, function(req, res){
+app.get("/blogs/:id", function(req, res){
   Blog.findById(req.params.id, function(err, foundBlog){
     if(err){
       res.send(err);
