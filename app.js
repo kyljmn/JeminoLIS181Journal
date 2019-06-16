@@ -9,7 +9,7 @@ var express = require("express"),
     User = require("./models/user");
 
 mongoose.set('useNewUrlParser', true);
-mongoose.connect("mongodb+srv://kyljmn:123@kyljmn-mvoiy.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://kyljmn:123htw@kyljmn-mvoiy.mongodb.net/test?retryWrites=true&w=majority");
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
