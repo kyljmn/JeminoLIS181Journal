@@ -132,6 +132,6 @@ app.get("/logout", function(req, res){
 });
 
 
-app.listen(8080, function(){
-  console.log("Server Running");
+app.listen(process.env.PORT, process.env.IP, function(){
+  console.log("Server started");
 });
