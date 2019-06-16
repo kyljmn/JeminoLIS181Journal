@@ -6,7 +6,8 @@ var express = require("express"),
     passport = require("passport"),
     localStrategy = require("passport-local"),
     Blog = require("./models/blog"),
-    User = require("./models/user");
+    User = require("./models/user"),
+    middleware = require("./middleware");
 
 mongoose.set('useNewUrlParser', true);
 mongoose.connect("mongodb+srv://kyljmn:123htw@kyljmn-mvoiy.mongodb.net/test?retryWrites=true&w=majority");
@@ -45,11 +46,11 @@ app.get("/blogs", function(req, res){
   });
 });
 
-app.get("/blogs/new", function(req, res){
+app.get("/blogs/new", middleware.isItKyle, function(req, res){
   res.render("new");
 });
 
-app.post("/blogs", function(req,res){
+app.post("/blogs", middleware.isItKyle, function(req,res){
   Blog.create(req.body.blog, function(err){
     if(err){
       res.render("new");
@@ -59,7 +60,7 @@ app.post("/blogs", function(req,res){
   });
 });
 
-app.get("/blogs/:id", function(req, res){
+app.get("/blogs/:id", middleware.isItKyle, function(req, res){
   Blog.findById(req.params.id, function(err, foundBlog){
     if(err){
       res.send(err);
@@ -69,7 +70,7 @@ app.get("/blogs/:id", function(req, res){
   });
 });
 
-app.get("/blogs/:id/edit", function(req, res){
+app.get("/blogs/:id/edit", middleware.isItKyle, function(req, res){
   Blog.findById(req.params.id, function(err, foundBlog){
     if(err){
       res.send(err);
@@ -79,7 +80,7 @@ app.get("/blogs/:id/edit", function(req, res){
   });
 })
 
-app.put("/blogs/:id", function(req, res){
+app.put("/blogs/:id", middleware.isItKyle, function(req, res){
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedCampground){
     if(err){
       res.send(err);
@@ -89,7 +90,7 @@ app.put("/blogs/:id", function(req, res){
   });
 });
 
-app.delete("/blogs/:id", function(req, res){
+app.delete("/blogs/:id", middleware.isItKyle, function(req, res){
   Blog.findByIdAndRemove(req.params.id, function(err){
     if(err){
       res.send(err);
