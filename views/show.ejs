@@ -3,9 +3,6 @@
   <div class="ui raised container segment">
     <img class="ui fluid rounded image" src="<%= blog.image %>">
     <h4 class="ui header"><%= blog.title %></h4>
-    <div class="meta">
-      <span><%= blog.created.toDateString() %></span>
-    </div>
     <p><%= blog.body %></p>
     <a class="ui green button" href="/blogs/<%= blog._id %>/edit">Edit Blog Post</a>
     <form id="formDel" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
