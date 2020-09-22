@@ -10,7 +10,7 @@ var express = require("express"),
     middleware = require("./middleware");
 
 mongoose.set('useNewUrlParser', true);
-mongoose.connect("mongodb+srv://kyljmn:123htw@kyljmn-mvoiy.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://*****:****@kyljmn-mvoiy.mongodb.net/test?retryWrites=true&w=majority");
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
